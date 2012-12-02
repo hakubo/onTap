@@ -11,17 +11,17 @@ Active state will be turned off
 
 == Usage
 
-on('#selector').tap(function(){});
-on('#selector').tap(function(){}, 'activeClass');
+  on('#selector').tap(function(){});
+  on('#selector').tap(function(){}, 'activeClass');
 
-var T = on('#selector');
+  var T = on('#selector');
 
-T.tap(function(){}).dblTap(function(){}).hold(function(){});
+  T.tap(function(){}).dblTap(function(){}).hold(function(){});
 
-T.removeAll();
+  T.removeAll();
 
-on(document.body).tap({'.element': function(){}})
+  on(document.body).tap({'.element': function(){}})
 
 == Author
 
-Jakub Olek
+Jakub Olek <bukaj.kelo()gmail.com>
