@@ -1,4 +1,4 @@
-== onTap ?
+# onTap ?
 
 The reason behind this small library is to help you with tap/double tap/hold gestures
 It is build to be fast and easy to set up
@@ -9,19 +9,25 @@ It also solves the problem with active state when you scroll a page
 if you'll move your finger by a small factor
 Active state will be turned off
 
-== Usage
+#Usage
 
-  on('#selector').tap(function(){});
-  on('#selector').tap(function(){}, 'activeClass');
+	on('#selector').tap(function(){});
+	on('#selector').tap(function(){}, 'activeClass');
 
-  var T = on('#selector');
+	var T = on('#selector');
+	T.tap(function(){})
+		.dblTap(function(){})
+		.hold(function(){});
+		
+	T.removeAll();
 
-  T.tap(function(){}).dblTap(function(){}).hold(function(){});
+	on(document.body).tap({'.element': function(){}})
 
-  T.removeAll();
+#TODO
+- Cleanup
+- Docs
+- Tests
 
-  on(document.body).tap({'.element': function(){}})
-
-== Author
+# Author
 
 Jakub Olek <bukaj.kelo()gmail.com>
