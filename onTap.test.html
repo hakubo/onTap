@@ -45,85 +45,43 @@
 <body>
 	<div id=wrap></div>
 	<script>
-var i = 0;
-		while(i++ < 100) {
-			document.getElementById('wrap').insertAdjacentHTML('beforeend', '<div class=square id=s'+i+'>0</div>')
-			document.getElementById('wrap').insertAdjacentHTML('beforeend', '<div class=rect id=s'+(i+100)+'>0</div>')
-			var sq = document.getElementById('s' +i);
+		(function(){
 
-			sq.click = 0;
-		}
+			var i = 0,
+				wrap = document.getElementById('wrap');
 
-function onRect(){
-	this.innerHTML = 'A';
-}
+			while(i++ < 10) {
+				wrap.insertAdjacentHTML('beforeend', '<div class=square id=s'+i+'>0</div><div class=rect id=s'+(i+100)+'>0</div>');
 
-var wrapper = document.getElementById('wrap');
+				document.getElementById('s' + i).click = 0;
+			}
 
-on(wrapper).tap({
-	'.rect': onRect,
-	'.square': function(ev){
-		this.innerHTML = ++this.click;
-		//return false;
-	}
-}, 'active').hold({
-	'.square': function(asdf){
-		//this.innerHTML = this.click + 10;
-	}
-}).hold({
-'.square': function(asdf){
-	this.click += 10;
-	this.innerHTML = this.click;
-}
-}).dblTap({
-		'.rect': function(){
-			this.innerHTML = 'dblTap!';
-		}
-		});
+			function onRect(){
+				this.innerHTML = 'A';
+			}
 
-var onWrap = on('#wrap');
+			var wrapper = document.getElementById('wrap');
 
-onWrap.tap(function(){
-
-}, 'active')
-
-onWrap.tap({
-	'.rect': function(){
-		console.log('anon')
-	}
-});
-
-onWrap.remove('tap', {
-	'.rect': onRect
-})
-//onWrap.removeAll();
-
-/*
-
-
-on(''#wrap').tap
-onWrap.tap({
-	'.square': function(){
-		this.style.background = 'green';
-	}
-}, 'active');*/
-
-
-//onWrap.removeTap();
-
-		/*var click  = 0;
-		onTap(document.getElementById('tapMe'), function(ev){
-			this.innerHTML = click++;
-		} ,'dupa')
-
-		onTap(document.getElementById('tapMe'), function(){
-			console.log('Im second');
-			return false;
-		})
-
-		onTap(document.getElementById('tapMeToo'), function(ev){
-			console.log(this, ev);
-		}, 'mhm')*/
+			on(wrapper)
+				.tap({
+					'.rect': onRect,
+					'.square': function(){
+						this.innerHTML = ++this.click;
+						//return false;
+					}
+				}, 'active')
+				.hold({
+					'.square': function(){
+						this.click += 10;
+						this.innerHTML = this.click;
+					}
+				})
+				.dblTap({
+					'.rect': function(){
+						this.innerHTML = 'dblTap!';
+					}
+				});
+		})();
 	</script>
 </body>
 </html>
