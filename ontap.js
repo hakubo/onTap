@@ -100,7 +100,7 @@
 		//this is where calculation happens
 		touchmove = function(ev){
 			var t = ev[touches][0];
-			!(abs(t.pageX - x) > THRESHOLD || abs(t.pageY - y) > THRESHOLD) && listen(this, rem, true) && clearTimeout(holdTime);
+			!(abs(t.pageX - x) > THRESHOLD || abs(t.pageY - y) > THRESHOLD) && listen(this, rem, true) && cTimeout(holdTime);
 		},
 
 		//this is the only listner always bound to an element
@@ -111,6 +111,9 @@
 
 			for(selector in funcs) {
 				if((selector == 'this' || t.matches(selector))) {
+
+					listen(this, add);
+
 					fire.push([selector, t]);
 
 					var txy = ev[touches][0],
@@ -126,8 +129,6 @@
 								listen(self, rem, true);
 							}
 						})(holds, t, txy, ev, this), HOLDTIME);
-					}else{
-						listen(this, add);
 					}
 
 					time = timeout((function(self){
