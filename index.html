@@ -14,6 +14,45 @@
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+	  <style>
+		  .square {
+			  width: 50px;
+			  height: 50px;
+			  background: #FC0;
+			  margin: 5px;
+			  display: inline-block;
+			  color: #333;
+			  text-align: center;
+			  line-height: 50px;
+		  }
+
+		  .rect {
+			  width: 100px;
+			  height: 50px;
+			  background: #4276B6;
+			  margin: 5px;
+			  display: inline-block;
+			  color: #D8D8D8;
+			  text-align: center;
+			  line-height: 50px;
+		  }
+
+		  .active {
+			  background-image: url(images/octocat-logo.png);
+			  background-position: center;
+			  background-repeat: no-repeat;
+		  }
+
+		  body {
+			  -webkit-touch-callout: none;
+			  -webkit-user-select: none;
+			  -khtml-user-select: none;
+			  -moz-user-select: none;
+			  -ms-user-select: none;
+			  user-select: none;
+		  }
+	  </style>
+
   </head>
   <body>
 
@@ -48,6 +87,46 @@
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+	  <script>
+		  (function(){
+
+			  var i = 0,
+					  wrap = document.getElementById('wrap');
+
+			  while(i++ < 21) {
+				  wrap.insertAdjacentHTML('beforeend', '<div class=rect id=s'+(i+100)+'>0</div><div class=square id=s'+i+'>0</div>');
+
+				  document.getElementById('s' + i).click = 0;
+			  }
+
+			  function onRect(){
+				  this.innerHTML = 'tap!';
+			  }
+
+			  var wrapper = document.getElementById('wrap');
+
+			  on(wrapper)
+					  .tap({
+						  '.rect': onRect,
+						  '.square': function(){
+							  this.innerHTML = ++this.click;
+							  //return false;
+						  }
+					  }, 'active')
+					  .hold({
+						  '.square': function(){
+							  this.click += 10;
+							  this.innerHTML = this.click;
+						  }
+					  })
+					  .dblTap({
+						  '.rect': function(){
+							  this.innerHTML = 'dblTap!';
+						  }
+					  });
+		  })();
+	  </script>
+
   </body>
 </html>
