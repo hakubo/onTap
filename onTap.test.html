@@ -1,0 +1,129 @@
+<!DOCTYPE >
+<html>
+<head>
+	<title>onTap Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+	<style>
+		.square {
+			width: 50px;
+			height: 50px;
+			background: gold;
+			margin: 5px;
+			display: inline-block;
+			color: green;
+			text-align: center;
+			line-height: 50px;
+		}
+
+		.rect {
+			width: 100px;
+			height: 50px;
+			background: black;
+			margin: 5px;
+			display: inline-block;
+			color: green;
+			text-align: center;
+			line-height: 50px;
+		}
+
+		.active {
+			background: yellow;
+		}
+
+		body {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	</style>
+	<script src="matches.js"></script>
+	<script src="ontap.js"></script>
+</head>
+<body>
+	<div id=wrap></div>
+	<script>
+var i = 0;
+		while(i++ < 100) {
+			document.getElementById('wrap').insertAdjacentHTML('beforeend', '<div class=square id=s'+i+'>0</div>')
+			document.getElementById('wrap').insertAdjacentHTML('beforeend', '<div class=rect id=s'+(i+100)+'>0</div>')
+			var sq = document.getElementById('s' +i);
+
+			sq.click = 0;
+		}
+
+function onRect(){
+	this.innerHTML = 'A';
+}
+
+var wrapper = document.getElementById('wrap');
+
+on(wrapper).tap({
+	'.rect': onRect,
+	'.square': function(ev){
+		this.innerHTML = ++this.click;
+		//return false;
+	}
+}, 'active').hold({
+	'.square': function(asdf){
+		//this.innerHTML = this.click + 10;
+	}
+}).hold({
+'.square': function(asdf){
+	this.click += 10;
+	this.innerHTML = this.click;
+}
+}).dblTap({
+		'.rect': function(){
+			this.innerHTML = 'dblTap!';
+		}
+		});
+
+var onWrap = on('#wrap');
+
+onWrap.tap(function(){
+
+}, 'active')
+
+onWrap.tap({
+	'.rect': function(){
+		console.log('anon')
+	}
+});
+
+onWrap.remove('tap', {
+	'.rect': onRect
+})
+//onWrap.removeAll();
+
+/*
+
+
+on(''#wrap').tap
+onWrap.tap({
+	'.square': function(){
+		this.style.background = 'green';
+	}
+}, 'active');*/
+
+
+//onWrap.removeTap();
+
+		/*var click  = 0;
+		onTap(document.getElementById('tapMe'), function(ev){
+			this.innerHTML = click++;
+		} ,'dupa')
+
+		onTap(document.getElementById('tapMe'), function(){
+			console.log('Im second');
+			return false;
+		})
+
+		onTap(document.getElementById('tapMeToo'), function(ev){
+			console.log(this, ev);
+		}, 'mhm')*/
+	</script>
+</body>
+</html>

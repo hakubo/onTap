@@ -1,0 +1,27 @@
+== onTap ?
+
+The reason behind this small library is to help you with tap/double tap/hold gestures
+It is build to be fast and easy to set up
+
+It won't work on devices without touchstart event support
+
+It also solves the problem with active state when you scroll a page
+if you'll move your finger by a small factor
+Active state will be turned off
+
+== Usage
+
+on('#selector').tap(function(){});
+on('#selector').tap(function(){}, 'activeClass');
+
+var T = on('#selector');
+
+T.tap(function(){}).dblTap(function(){}).hold(function(){});
+
+T.removeAll();
+
+on(document.body).tap({'.element': function(){}})
+
+== Author
+
+Jakub Olek
